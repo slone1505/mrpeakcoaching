@@ -183,7 +183,7 @@
 
   /* STATS */
   .stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
+    display: grid; grid-template-columns: repeat(2, 1fr);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
@@ -248,6 +248,7 @@
     padding: 2.5rem;
     position: relative;
     transition: background 0.2s;
+    display: flex; flex-direction: column;
   }
   .pricing-card:hover { background: var(--bg3); }
 
@@ -287,7 +288,7 @@
     border-bottom: 1px solid var(--border);
   }
 
-  .card-features { list-style: none; margin-bottom: 2rem; }
+  .card-features { list-style: none; margin-bottom: 2rem; flex: 1; }
   .card-features li {
     font-size: 0.85rem; color: var(--muted);
     padding: 0.5rem 0;
@@ -409,6 +410,24 @@
     letter-spacing: 0.05em;
   }
 
+  /* IMMORTAL BG TEXT */
+  .immortal-bg {
+    position: absolute;
+    bottom: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 18vw, 16rem);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,70,85,0.15);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    line-height: 1;
+  }
+
   /* SCROLL REVEAL */
   .reveal {
     opacity: 0; transform: translateY(30px);
@@ -447,6 +466,7 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <div class="immortal-bg">IMMORTAL 2</div>
   <div class="hero-content">
     <div class="hero-tag">Valorant Coaching</div>
     <h1>ELEVATE<br>YOUR <span class="accent">GAME.</span></h1>
@@ -457,8 +477,8 @@
     </div>
   </div>
   <div class="hero-rank">
-    <div class="rank-badge">R</div>
-    <span class="rank-label">Radiant Level</span>
+    <div class="rank-badge">I2</div>
+    <span class="rank-label">Immortal 2</span>
   </div>
 </section>
 
@@ -482,26 +502,30 @@
     <div class="pricing-card featured">
       <div class="card-name">Standard</div>
       <div class="card-price"><span class="currency">€</span>7<span class="period">.99 / hour</span></div>
-      <div class="card-desc">Available after free spots are filled. Professional 1-on-1 session with Mr. Peak.</div>
+      <div class="card-desc">Professional 1-on-1 session with Mr. Peak. Pay via Whop and a Discord ticket gets created automatically.</div>
       <ul class="card-features">
         <li class="highlight">1 hour coaching session</li>
         <li class="highlight">VOD review</li>
         <li>Live session analysis</li>
         <li>Personalised improvement plan</li>
+        <li class="highlight">Auto ticket on payment</li>
       </ul>
-      <a href="https://discord.gg/zekromfr" target="_blank" class="btn-primary" style="width:100%; text-align:center; display:block;">Book via Discord</a>
+      <a href="YOUR_WHOP_LINK" target="_blank" class="btn-primary" style="width:100%; text-align:center; display:block; margin-bottom:0.6rem;">Book via Whop</a>
+      <a href="https://discord.gg/zekromfr" target="_blank" class="btn-secondary" style="width:100%; text-align:center; display:block; font-size:0.75rem; padding:0.6rem;">Join Discord</a>
     </div>
     <div class="pricing-card">
       <div class="card-name">Twitch Sub</div>
       <div class="card-price"><span class="currency">€</span>3<span class="period">.99 / hour</span></div>
-      <div class="card-desc">Exclusive rate for Twitch subscribers. Priority selection for free spots too.</div>
+      <div class="card-desc">Exclusive rate for Twitch subscribers. Pay via Whop and a Discord ticket gets created automatically.</div>
       <ul class="card-features">
         <li class="highlight">1 hour coaching session</li>
         <li class="highlight">VOD review</li>
         <li class="highlight">Priority selection</li>
         <li>50% off standard price</li>
+        <li class="highlight">Auto ticket on payment</li>
       </ul>
-      <a href="https://discord.gg/zekromfr" target="_blank" class="btn-secondary" style="width:100%; text-align:center; display:block;">Book via Discord</a>
+      <a href="YOUR_WHOP_LINK_SUB" target="_blank" class="btn-primary" style="width:100%; text-align:center; display:block; margin-bottom:0.6rem;">Book via Whop</a>
+      <a href="https://discord.gg/zekromfr" target="_blank" class="btn-secondary" style="width:100%; text-align:center; display:block; font-size:0.75rem; padding:0.6rem;">Join Discord</a>
     </div>
   </div>
 </section>
@@ -567,7 +591,7 @@
 
 <footer>
   <div class="footer-logo">Mr.<span>Peak</span></div>
-  <p>Valorant Coaching — All bookings via Discord</p>
+  <p>Valorant Coaching — Immortal 2 — All bookings via Whop & Discord</p>
 </footer>
 
 <script>
