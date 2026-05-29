@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr. Peak's Coaching — Valorant</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #FF4655;
+    --red-dark: #c0303d;
+    --bg: #0f0f0f;
+    --bg2: #161616;
+    --bg3: #1e1e1e;
+    --text: #f0ede8;
+    --muted: #7a7672;
+    --border: rgba(255,255,255,0.07);
+    --gold: #c8a84b;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(15,15,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--red); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); font-size: 0.85rem; text-decoration: none;
+    letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(255,70,85,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,168,75,0.06) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  .hero-content { position: relative; max-width: 700px; text-align: center; margin: 0 auto; }
+
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,70,85,0.1); border: 1px solid rgba(255,70,85,0.25); border-radius: 2px; padding: 0.35rem 0.9rem; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); font-weight: 500; margin: 0 auto 1.5rem; animation: fadeUp 0.6s ease both; }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 9vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 .accent { color: var(--red); }
+
+  .hero p { font-size: 1.05rem; line-height: 1.7; color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; animation: fadeUp 0.6s 0.2s ease both; }
+
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; justify-content: center; }
+
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    padding: 0.85rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+  .hero-rank { display: none; }
+
+  .rank-badge {
+    width: 160px; height: 160px;
+    background: radial-gradient(circle at 50% 40%, rgba(255,70,85,0.2), transparent 70%);
+    border: 1px solid rgba(255,70,85,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: var(--red);
+    position: relative;
+  }
+
+  .rank-badge::after {
+    content: '';
+    position: absolute; inset: -8px;
+    border: 1px solid rgba(255,70,85,0.08);
+    border-radius: 50%;
+  }
+
+  .rank-label {
+    font-size: 0.7rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 500;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* STATS */
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat { padding: 2.5rem 4rem; border-right: 1px solid var(--border); text-align: center; }
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .stat-num span { color: var(--red); }
+
+  .stat-label {
+    font-size: 0.78rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* PRICING */
+  .section {
+    padding: 6rem 4rem;
+    text-align: center;
+  }
+
+  .section-tag { text-align: center; }
+
+  .section-sub { margin-left: auto; margin-right: auto; }
+
+  .section-tag {
+    font-size: 0.72rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--red);
+    font-weight: 500; margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.03em;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-sub {
+    color: var(--muted); font-size: 0.95rem;
+    line-height: 1.7; max-width: 500px;
+    margin-bottom: 3rem;
+  }
+
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); max-width: 800px;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 0 auto;
+  }
+
+  .pricing-card {
+    background: var(--bg2);
+    padding: 2.5rem;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .pricing-card:hover { background: var(--bg3); }
+
+  .pricing-card.featured {
+    background: var(--bg3);
+  }
+
+  .pricing-card.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute; top: 0; right: 0;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 0.3rem 0.75rem;
+  }
+
+  .card-name {
+    font-size: 0.72rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 500; margin-bottom: 1rem;
+  }
+
+  .card-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem; line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .card-price .currency { font-size: 1.5rem; vertical-align: top; margin-top: 0.5rem; display: inline-block; }
+  .card-price .period { font-size: 1rem; color: var(--muted); font-family: 'DM Sans', sans-serif; font-weight: 300; }
+
+  .card-desc {
+    font-size: 0.85rem; color: var(--muted);
+    line-height: 1.6; margin: 1rem 0 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-features { list-style: none; margin-bottom: 2rem; }
+  .card-features li {
+    font-size: 0.85rem; color: var(--muted);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-features li::before {
+    content: '—';
+    color: var(--red); font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .card-features li.highlight { color: var(--text); }
+
+  /* WHAT YOU GET */
+  .features-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 800px; margin: 0 auto;
+  }
+
+  .feature-item {
+    background: var(--bg2);
+    padding: 2rem 2.5rem;
+    display: flex; gap: 1.5rem;
+    transition: background 0.2s;
+  }
+  .feature-item:hover { background: var(--bg3); }
+
+  .feature-icon {
+    font-size: 1.5rem; flex-shrink: 0;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,70,85,0.08);
+    border: 1px solid rgba(255,70,85,0.15);
+  }
+
+  .feature-title {
+    font-weight: 500; margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+  }
+
+  .feature-desc {
+    font-size: 0.83rem; color: var(--muted); line-height: 1.6;
+  }
+
+  /* TWITCH BANNER */
+  .twitch-banner { margin: 0 auto; max-width: 800px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 2.5rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .twitch-banner::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: #9146FF;
+  }
+
+  .twitch-banner-left { display: flex; align-items: center; gap: 1.5rem; }
+
+  .twitch-icon {
+    font-size: 2rem; width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(145,70,255,0.1);
+    border: 1px solid rgba(145,70,255,0.2);
+    flex-shrink: 0;
+  }
+
+  .twitch-title {
+    font-weight: 500; font-size: 1rem; margin-bottom: 0.25rem;
+  }
+
+  .twitch-desc {
+    font-size: 0.83rem; color: var(--muted); line-height: 1.5;
+  }
+
+  .twitch-price {
+    text-align: right; flex-shrink: 0;
+  }
+
+  .twitch-price .old {
+    font-size: 0.85rem; color: var(--muted);
+    text-decoration: line-through; margin-bottom: 0.1rem;
+  }
+
+  .twitch-price .new {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem; color: #9146FF; line-height: 1;
+  }
+
+  .twitch-price .save {
+    font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #9146FF;
+    font-weight: 500;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 6rem;
+    padding: 2.5rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem; letter-spacing: 0.1em;
+  }
+  .footer-logo span { color: var(--red); }
+
+  footer p {
+    font-size: 0.78rem; color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; flex-direction: column; min-height: auto; }
+    .hero-rank { position: static; transform: none; margin-top: 3rem; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1.5rem; }
+    .section { padding: 4rem 1.5rem; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
+    .features-grid { grid-template-columns: 1fr; }
+    .twitch-banner { margin: 0 1.5rem; flex-direction: column; align-items: flex-start; }
+    .twitch-price { text-align: left; }
+    footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Mr.<span>Peak</span></a>
+  <ul class="nav-links">
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#what">What you get</a></li>
+    <li><a href="#discord">Discord</a></li>
+  </ul>
+  <a href="#pricing" class="btn-primary" style="font-size:0.75rem; padding:0.6rem 1.4rem;">Book Now</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Valorant Coaching</div>
+    <h1>ELEVATE<br>YOUR <span class="accent">GAME.</span></h1>
+    <p>Professional Valorant coaching tailored to your playstyle. Improve your rank, mechanics, and game sense with Mr. Peak.</p>
+    <div class="hero-cta">
+      <a href="#pricing" class="btn-primary">Get Coached</a>
+      <a href="#what" class="btn-secondary">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-rank">
+    <div class="rank-badge">R</div>
+    <span class="rank-label">Radiant Level</span>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-num">7<span>.99€</span></div>
+    <div class="stat-label">Price per hour</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">3<span>.99€</span></div>
+    <div class="stat-label">For Twitch subscribers</div>
+  </div>
+</div>
+
+<section class="section" id="pricing">
+  <div class="section-tag">Pricing</div>
+  <h2 class="section-title reveal">CHOOSE YOUR PLAN</h2>
+  <p class="section-sub reveal">Professional 1-on-1 Valorant coaching with Mr. Peak. Twitch subscribers always get an exclusive discount.</p>
+
+  <div class="pricing-grid reveal">
+    <div class="pricing-card featured">
+      <div class="card-name">Standard</div>
+      <div class="card-price"><span class="currency">€</span>7<span class="period">.99 / hour</span></div>
+      <div class="card-desc">Available after free spots are filled. Professional 1-on-1 session with Mr. Peak.</div>
+      <ul class="card-features">
+        <li class="highlight">1 hour coaching session</li>
+        <li class="highlight">VOD review</li>
+        <li>Live session analysis</li>
+        <li>Personalised improvement plan</li>
+      </ul>
+      <a href="https://discord.gg/zekromfr" target="_blank" class="btn-primary" style="width:100%; text-align:center; display:block;">Book via Discord</a>
+    </div>
+    <div class="pricing-card">
+      <div class="card-name">Twitch Sub</div>
+      <div class="card-price"><span class="currency">€</span>3<span class="period">.99 / hour</span></div>
+      <div class="card-desc">Exclusive rate for Twitch subscribers. Priority selection for free spots too.</div>
+      <ul class="card-features">
+        <li class="highlight">1 hour coaching session</li>
+        <li class="highlight">VOD review</li>
+        <li class="highlight">Priority selection</li>
+        <li>50% off standard price</li>
+      </ul>
+      <a href="https://discord.gg/zekromfr" target="_blank" class="btn-secondary" style="width:100%; text-align:center; display:block;">Book via Discord</a>
+    </div>
+  </div>
+</section>
+
+<div class="twitch-banner reveal">
+  <div class="twitch-banner-left">
+    <div class="twitch-icon">💜</div>
+    <div>
+      <div class="twitch-title">Twitch Subscriber Exclusive</div>
+      <div class="twitch-desc">Subscribe on Twitch to get priority access to free spots and a permanent 50% discount on all coaching sessions.</div>
+    </div>
+  </div>
+  <div class="twitch-price">
+    <div class="old">7.99 € / hr</div>
+    <div class="new">3.99€</div>
+    <div class="save">Save 50%</div>
+  </div>
+</div>
+
+<section class="section" id="what">
+  <div class="section-tag">What You Get</div>
+  <h2 class="section-title reveal">COACHING BREAKDOWN</h2>
+  <p class="section-sub reveal">Every session is tailored to your rank, role, and goals. No generic advice — only targeted improvement.</p>
+
+  <div class="features-grid reveal">
+    <div class="feature-item">
+      <div class="feature-icon">🎯</div>
+      <div>
+        <div class="feature-title">Aim & Mechanics</div>
+        <div class="feature-desc">Crosshair placement, movement, and shooting mechanics reviewed and corrected in real time.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🧠</div>
+      <div>
+        <div class="feature-title">Game Sense</div>
+        <div class="feature-desc">Map awareness, rotations, timing, and decision-making — the skills that separate good players from great ones.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📹</div>
+      <div>
+        <div class="feature-title">VOD Review</div>
+        <div class="feature-desc">Watch back your games together and identify exactly where you're losing rounds and why.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📋</div>
+      <div>
+        <div class="feature-title">Improvement Plan</div>
+        <div class="feature-desc">Leave every session with a clear, actionable plan focused on your personal weaknesses.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="discord" style="padding-top:0;">
+  <div class="section-tag">How to Apply</div>
+  <h2 class="section-title reveal">JOIN THE DISCORD</h2>
+  <p class="section-sub reveal">All coaching bookings are handled through Discord. Open a ticket, fill in your details, and we'll get back to you.</p>
+  <a href="https://discord.gg/zekromfr" target="_blank" class="btn-primary reveal">Join Discord Server</a>
+</section>
+
+<footer>
+  <div class="footer-logo">Mr.<span>Peak</span></div>
+  <p>Valorant Coaching — All bookings via Discord</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
